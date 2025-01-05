@@ -1,5 +1,6 @@
 package org.example;
 
+import base.CommonAPI;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.openqa.selenium.By;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class CryptoQuoteFetcher {
+public class CryptoQuoteFetcher extends CommonAPI {
 
     WebDriver driver;
 
@@ -33,11 +34,13 @@ public class CryptoQuoteFetcher {
      */
     public String fetchCryptoPrice(String ticker) throws Exception {
         // Construct the URL for the cryptocurrency
-        String url = "https://www.google.com/finance/quote/" + ticker + "-USD";
+        //String url = "https://www.google.com/finance/quote/" + ticker + "-USD";
+        String url = "https://finance.yahoo.com/quote/"+ticker+"-USD/";
         driver.get(url);
 
         // Locate the price element
-        WebElement priceElement = driver.findElement(By.cssSelector(".YMlKec.fxKbKc"));
+        //WebElement priceElement = driver.findElement(By.cssSelector(".YMlKec.fxKbKc"));
+        WebElement priceElement = driver.findElement(By.cssSelector("#nimbus-app > section > section > section > article > section.container.yf-k4z9w > div.bottom.yf-k4z9w > div.price.yf-k4z9w > section > div > section > div.container.yf-1tejb6 > fin-streamer.livePrice.yf-1tejb6 > span"));
         return priceElement.getText();
     }
 
@@ -98,6 +101,8 @@ public class CryptoQuoteFetcher {
     }
 
     public static void main(String[] args) {
+
+        setUpConfig();
         // Configure ChromeDriver path
         // System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver"); // Replace with your ChromeDriver path
 
@@ -111,9 +116,16 @@ public class CryptoQuoteFetcher {
 
         // Create a dynamic list of cryptocurrency tickers
         List<String> cryptoTickers = new ArrayList<>();
-        cryptoTickers.add("BTC");
-        cryptoTickers.add("ETH");
-        cryptoTickers.add("DOGE");
+        cryptoTickers.add(getCryptoName("crypto1"));
+
+        //cryptoTickers.add(getCryptoName("crypto2"));
+
+        cryptoTickers.add(getCryptoName("crypto3"));
+        /*
+        cryptoTickers.add(getCryptoName("crypto4"));
+
+
+         */
 
         // Add more cryptocurrencies dynamically if needed
         // cryptoTickers.add("LTC");
