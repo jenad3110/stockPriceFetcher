@@ -124,7 +124,6 @@ public class CryptoQuoteFetcher extends CommonAPI {
         /*
         cryptoTickers.add(getCryptoName("crypto4"));
 
-
          */
 
         // Add more cryptocurrencies dynamically if needed
